@@ -6,7 +6,7 @@ import {CdkPipelineStackProps} from '../lib/cdk-pipeline-stack'
 
 
 const app = new cdk.App();
- //new CdkPipelineStack(app, 'demo-pipeline',{branchName:'main'}),
+ 
 
  const myStackMain = new CdkPipelineStack(app, 'main-pipeline',{
    branchName:'main',
@@ -16,4 +16,3 @@ const app = new cdk.App();
     stackName:'devStack'})
 
 
-//app.synth();

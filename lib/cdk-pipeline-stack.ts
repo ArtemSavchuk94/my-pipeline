@@ -11,7 +11,11 @@ import { CdkStage } from './cdk-stage';
 export class CdkPipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props:CdkPipelineStackProps) {
     super(scope, id, props);
-    const pipeline = new CodePipeline(this,"my-pileline",{
+    const myBranch = props.branchName
+
+
+
+    const pipeline = new CodePipeline(this,"my-cicd-pileline",{
       synth: new ShellStep('Synth',{ commands:['npm ci','npm run build', 'npx cdk synth'],
       input: CodePipelineSource.gitHub('ArtemSavchuk94/my-pipeline',props.branchName)
     
@@ -19,11 +23,10 @@ export class CdkPipelineStack extends cdk.Stack {
     })
     
      pipeline.addStage(new CdkStage (this,"my-dev-stage",))
-    //  const mainStage = pipeline.addStage(new CdkStage (this,"my-main-stage"))
+   
 
 
-
-
+   
 
 
 
