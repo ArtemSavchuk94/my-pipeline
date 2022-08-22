@@ -5,17 +5,21 @@ import { CodePipeline,CodePipelineSource,ShellStep } from 'aws-cdk-lib/pipelines
 import { CdkStage } from './cdk-stage';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
+ export interface CdkPipelineStackProps extends cdk.StackProps {
+  branchName:string
+}
 export class CdkPipelineStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props:CdkPipelineStackProps) {
     super(scope, id, props);
     const pipeline = new CodePipeline(this,"my-pileline",{
       synth: new ShellStep('Synth',{ commands:['npm ci','npm run build', 'npx cdk synth'],
-      input: CodePipelineSource.gitHub('ArtemSavchuk94/my-pipeline','main')
+      input: CodePipelineSource.gitHub('ArtemSavchuk94/my-pipeline',props.branchName)
     
       })
     })
     
-    pipeline.addStage(new CdkStage (this,"my-stage"))
+     pipeline.addStage(new CdkStage (this,"my-dev-stage",))
+    //  const mainStage = pipeline.addStage(new CdkStage (this,"my-main-stage"))
 
 
 
