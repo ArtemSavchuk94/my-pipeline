@@ -10,9 +10,9 @@ const app = new cdk.App();
 
  const myStackMain = new CdkPipelineStack(app, 'main-pipeline',{
    branchName:'main',
-   stackName:'mainStack'})
+   stackName:'main-pipeline'})
  const myStackDev = new CdkPipelineStack(app, 'dev-pipeline',{
     branchName:'dev',
-    stackName:'devStack'})
+    stackName:'dev-pipeline'})
 
 
