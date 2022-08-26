@@ -3,6 +3,8 @@ import { ConfigurationSetTlsPolicy } from 'aws-cdk-lib/aws-ses';
 import { Construct } from 'constructs';
 import { CodePipeline,CodePipelineSource,ShellStep } from 'aws-cdk-lib/pipelines';
 import { CdkStage } from './cdk-stage';
+import {GitHubTrigger} from "aws-cdk-lib/aws-codepipeline-actions";
+
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
  export interface CdkPipelineStackProps extends cdk.StackProps {
@@ -16,9 +18,11 @@ export class CdkPipelineStack extends cdk.Stack {
 
 
     const pipeline = new CodePipeline(this,"my-cicd-pileline",{
+      //selfMutation: true,
       pipelineName:'my-cicd-pipeline',
       synth: new ShellStep('Synth',{ commands:['npm ci','npm run build', `npx cdk synth ${this.stackName}`],
-      input: CodePipelineSource.gitHub('ArtemSavchuk94/my-pipeline',props.branchName)
+      input: CodePipelineSource.gitHub('ArtemSavchuk94/my-pipeline',props.branchName,//{trigger: GitHubTrigger.WEBHOOK}
+      )
     
       })
     })
