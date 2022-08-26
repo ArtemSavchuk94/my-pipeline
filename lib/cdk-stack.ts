@@ -9,10 +9,7 @@ export class CdkStack extends Stack {
         removalPolicy:RemovalPolicy.DESTROY,
         autoDeleteObjects:true,
     })
-    //const bucket2 = new Bucket(this,'my-bucket2',{
-      // removalPolicy:RemovalPolicy.DESTROY,
-       //autoDeleteObjects:true,
-    //})
+   
    
     }
 }
