@@ -7,7 +7,6 @@ import {CdkPipelineStackProps} from '../lib/cdk-pipeline-stack'
 
 const app = new cdk.App();
  
-
  const myStackMain = new CdkPipelineStack(app, 'main-pipeline',{
    branchName:'main',
    stackName:'main-pipeline'})
