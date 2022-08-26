@@ -18,6 +18,7 @@ export class CdkPipelineStack extends cdk.Stack {
 
 
     const pipeline = new CodePipeline(this,"my-cicd-pileline",{
+      selfMutation: true,
       pipelineName:'my-cicd-pipeline',
       synth: new ShellStep('Synth',{ commands:['npm ci','npm run build', `npx cdk synth ${this.stackName}`],
       input: CodePipelineSource.gitHub('ArtemSavchuk94/my-pipeline',props.branchName,//{trigger: GitHubTrigger.WEBHOOK}
